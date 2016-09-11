@@ -1,0 +1,67 @@
+<style>
+	#lcol { width:100%; }
+	.calc {	width:100%; padding:10px; }
+	.calc textarea { width:100%; font-size:large; }
+	.calc input[type=text] { width:100%; font-size:x-large; padding:5px 2px; }
+</style>
+<div id="wrapper">
+
+<article id="lcol">
+
+
+	
+	<section id="doc">
+	<!-- #BeginEditable "doctext" -->
+	<h1>ASCII to Hex converter</h1>
+	<p>ASCII to hex text converter.</p>
+	<p>Enter ASCII text and press the <em>Convert</em> button:</p>
+	<form name="calcform">
+	<table class="calc">
+		<tr>
+			<td><textarea name="txt" rows="8" cols="60" class="intext" placeholder="ASCII text input ..." autofocus></textarea></td>
+		</tr>
+		<tr>
+			<td>Enter delimiter string (optional): <input type="text" name="del" value=" " class="intext" style="width:50px;">
+			&nbsp;&nbsp;&nbsp;&nbsp;(e.g:' ' , ' 0x' , ',0x' , 'h,')</td>
+		</tr>
+		<tr>
+			<td><input type="button" value="Convert" onclick="OnConvert()" class="btn"> <input type="reset" class="btn"></td>
+		</tr>
+		<tr>
+			<td><textarea name="hex" rows="8" cols="60" readonly="readonly" class="outtext"></textarea></td>
+		</tr>
+		<tr>
+			<td><input type="button" value="Select" onclick="OnSelect()" class="btn"></td>
+		</tr>
+	</table>
+	</form>
+
+	<script>
+		function OnConvert()
+		{
+			txt = document.calcform.txt.value;
+			del = document.calcform.del.value;
+			len = txt.length;
+			if( len==0 ) return;
+			hex='';
+			for(i=0; i<len; i++)
+			{
+				a = txt.charCodeAt(i);
+				h = a.toString(16);
+				if( h.length==1 ) h='0'+h;
+				hex += h;
+				if( i<len-1) hex+=del;
+			}
+			document.calcform.hex.value = hex;
+		}
+		function OnSelect()
+		{
+			document.calcform.hex.select();
+		}
+	</script>
+	<!-- #EndEditable -->
+	</section>
+
+</article>
+
+</div>
